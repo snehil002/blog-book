@@ -1,4 +1,4 @@
-# Snehil's Little Tech Blog
+# BlogBook: A Full Stack Online Blogging Platform
 
 ## Exciting Features
 * Authentication
@@ -34,4 +34,4 @@
 * `npm start`
 
 ## Technologies Used
-EJS, Node.js, Express.js, MongoDB, Mongoose.js, Passport.js, HTML, CSS, JS
+EJS, Node.js, Express.js, MongoDB, Mongoose.js, Passport.js, Bootstrap, HTML, CSS, JS
