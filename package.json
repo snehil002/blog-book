@@ -1,9 +1,10 @@
 {
-  "name": "snehil-blog",
+  "name": "blog-book",
   "version": "1.0.0",
-  "description": "Snehil's Little Tech Blog",
+  "description": "Blogbook: An online blogging platform",
   "main": "app.js",
   "scripts": {
+    "dev": "nodemon app.js",
     "start": "node app.js"
   },
   "author": "Snehil Kumar",

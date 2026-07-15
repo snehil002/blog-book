@@ -11,8 +11,8 @@ const findOrCreate = require('mongoose-findorcreate');
 
 
 const app = express();
-const port = process.env.SNEHIL_BLOG_PORT || 4000;
-const host = process.env.SNEHIL_BLOG_LIVE_URL || "http://localhost:4000"
+const port = process.env.PORT || 4000;
+const host = process.env.LIVE_URL || "http://localhost:4000"
 
 
 
@@ -38,7 +38,7 @@ const run = async () => {
   // Example URL:
   // `mongodb://127.0.0.1:27017/DBname`
   // `mongodb+zzz://user:passd@xxx.yyy.mongodb.net/DBname`
-  const url = process.env.SNEHIL_BLOG_MONGODB_URL || "mongodb://127.0.0.1:27017";
+  const url = process.env.MONGODB_URL || "mongodb://127.0.0.1:27017";
   const dbName = "techBlogDB";
   await connect(`${url}/${dbName}`);
   console.log(`Connected to ${dbName}`);
@@ -391,7 +391,7 @@ app.post("/articles/delete/:id", async (req, res) => {
 
 /////////////////////////// Start App Server ///////////////////////////////////
 app.listen(port, () => {
-  if (process.env.SNEHIL_BLOG_PORT) {
+  if (process.env.PORT) {
     console.log(`Server started at ${port}`);
   } else {
     console.log(`Server started at http://localhost:${port}`);
