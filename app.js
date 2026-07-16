@@ -1,18 +1,17 @@
 require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
-const {Schema, model, connect, disconnect} = require('mongoose');
+const {Schema, model, connect, disconnect, connection} = require('mongoose');
 const session = require('express-session');
 const passport = require('passport');
 const passportLocalMongoose = require('passport-local-mongoose');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const findOrCreate = require('mongoose-findorcreate');
+const { PORT, LIVE_URL, MONGODB_URL, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = require("./config/env");
 
 
 
 const app = express();
-const port = process.env.PORT || 4000;
-const host = process.env.LIVE_URL || "http://localhost:4000"
 
 
 
@@ -38,11 +37,9 @@ const run = async () => {
   // Example URL:
   // `mongodb://127.0.0.1:27017/DBname`
   // `mongodb+zzz://user:passd@xxx.yyy.mongodb.net/DBname`
-  const url = process.env.MONGODB_URL || "mongodb://127.0.0.1:27017";
-  const dbName = "techBlogDB";
-  await connect(`${url}/${dbName}`);
-  console.log(`Connected to ${dbName}`);
-}
+  await connect(MONGODB_URL);
+  console.log(`DB Connected: ${connection.name}`);
+};
 
 run()
 .catch((err) => console.error(err))
@@ -88,9 +85,9 @@ passport.deserializeUser(function(id, done) {
 });
 
 passport.use(new GoogleStrategy({
-    clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: `${host}/auth/google/articles` // Example: "http://localhost:4000/auth/google/articles"
+    clientID: GOOGLE_CLIENT_ID,
+    clientSecret: GOOGLE_CLIENT_SECRET,
+    callbackURL: `${LIVE_URL}/auth/google/articles` // Example: "http://localhost:4000/auth/google/articles"
   },
   function(accessToken, refreshToken, profile, cb) {
 
@@ -390,10 +387,6 @@ app.post("/articles/delete/:id", async (req, res) => {
 
 
 /////////////////////////// Start App Server ///////////////////////////////////
-app.listen(port, () => {
-  if (process.env.PORT) {
-    console.log(`Server started at ${port}`);
-  } else {
-    console.log(`Server started at http://localhost:${port}`);
-  }
+app.listen(PORT, () => {
+  console.log(`Server started at http://localhost:${PORT}`);
 });
