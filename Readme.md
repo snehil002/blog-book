@@ -1,4 +1,4 @@
-# BlogBook by Snehil: A Full Stack Online Blogging Platform
+# Blogbook: A Full Stack Online Blogging Platform
 
 ## Exciting Features
 
