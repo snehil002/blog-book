@@ -1,7 +1,7 @@
 {
   "name": "blog-book",
   "version": "1.0.0",
-  "description": "Blogbook: An online blogging platform",
+  "description": "Blogbook: A Full Stack Online Blogging Platform",
   "main": "app.js",
   "scripts": {
     "dev": "nodemon app.js",
